@@ -15,7 +15,7 @@ class FeedHelper
 {
 	private $plugins=array();
 
-	//Going to switch to use WordPress function get_plugins();
+	//Going to switch to use WordPress function get_plugins(); 
 	private function getPlugins()
 	{
 		foreach(glob('./*', GLOB_ONLYDIR) as $dir) 
@@ -90,10 +90,8 @@ function feedhelper_settings_page()
 <p>
 	Press start to identify newlines at the end of PHP files. 
 	<?php
-	/*
 	$all_plugins = get_plugins();
 	print_r( $all_plugins, true ) 
-	*/
 	?>
 </p>
 <input type="button" name="feedhelper_go" id="feedhelper_go" class="button button-primary" value="Start">
