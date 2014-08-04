@@ -12,8 +12,13 @@
 
 
 
+<<<<<<< HEAD
 	$plugins=array();
 	function getPlugins()
+=======
+	//Going to switch to use WordPress function get_plugins(); 
+	private function getPlugins()
+>>>>>>> FETCH_HEAD
 	{
 	  	$all_plugins = get_plugins();
 		$plugins=array_keys($all_plugins);
@@ -87,9 +92,14 @@ function feedhelper_settings_page()
 <p>
 	Press start to identify newlines at the end of PHP files. <br>
 	<?php
+<<<<<<< HEAD
 
   loopThroughFiles();
   //var_dump($all_plugins);
+=======
+	$all_plugins = get_plugins();
+	print_r( $all_plugins, true ) 
+>>>>>>> FETCH_HEAD
 	?>
 </p>
 <input type="button" name="feedhelper_go" id="feedhelper_go" class="button button-primary" value="Start">
