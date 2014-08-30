@@ -9,18 +9,24 @@
  * License: A "Slug" license name e.g. GPL2
  */
 
- 	function getPlugins()
-	{
-	  	$all_plugins = get_plugins();
-		$plugins=array_keys($all_plugins);
-	}
+
+add_action( 'wp_ajax_feedhelper_findnewlines', 'feedhelper_findnewlines' );
+
+function feedhelper_findnewlines()
+{
+  
+  echo loopThroughFiles();
+  die();
+}
+
 
 	function loopThroughFiles()
 	{
 	  	$all_plugins = get_plugins();
 		$plugins=array_keys($all_plugins);
 
-	  	$plugin_dir = ABSPATH . 'wp-content/plugins/';
+	  	$plugin_dir = WP_CONTENT_DIR . '/plugins/';
+	  	$found_lines="";
 		foreach($plugins as $plugin)
 		{ 
 		  	$plugin_a=explode("/",$plugin);
@@ -33,11 +39,12 @@
 				{
 					if (findNewline($file->getpathName()))
 					{
-					  echo "Found newline in" . $file->getpathName() . "<br>";
+					  $found_lines = $found_lines . "Found newline at the end of /" . str_replace(ABSPATH,"",$file->getpathName()) . "<br>";
 					}	
 				}
 			}	
-		}	
+		}
+	  	return $found_lines;
 	}
 
 	function findNewline($pluginfile)
@@ -65,7 +72,8 @@ function feedhelper_create_menu() {
 	add_action( 'admin_init', 'register_feedhelper_settings' );
 }
 
-function feedhelper_load_scripts($hook) {
+function feedhelper_load_scripts($hook) 
+{
  
 	global $feedhelper_settings_page;
 	if( $hook != $feedhelper_settings_page ) 
@@ -82,12 +90,8 @@ function feedhelper_settings_page()
 <h2>Feed Helper</h2>
 <p>
 	Press start to identify newlines at the end of PHP files. <br>
-	<?php
 
-  loopThroughFiles();
-
-
-	?>
+  <div id="feedhelper_results"></div>
 </p>
 <input type="button" name="feedhelper_go" id="feedhelper_go" class="button button-primary" value="Start">
 </div>
