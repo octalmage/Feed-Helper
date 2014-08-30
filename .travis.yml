@@ -29,11 +29,11 @@ matrix:
     - php: "5.3"
       env: WP_VERSION=master
     - php: "5.2"
+      env: WP_VERSION=master
+    - php: "5.3"
+      env: WP_VERSION=3.9
+    - php: "5.3"
       env: WP_VERSION=3.8
-    - php: "5.3"
-      env: WP_VERSION=3.7
-    - php: "5.3"
-      env: WP_VERSION=3.6
 
 # Clones WordPress and configures our testing environment.
 before_script:
